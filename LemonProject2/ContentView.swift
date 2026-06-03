@@ -1,19 +1,14 @@
-//
-//  ContentView.swift
-//  LemonProject2
-//
-//  Created by Robert Vinson on 6/2/26.
-//
-
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
+            Image(systemName: "graduationcap.fill") // view
                 .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+                .foregroundStyle(.red)
+            Text("Cohort 10") // view
+            Text("Welcome")
+                .font(.caption)
         }
         .padding()
     }
@@ -22,3 +17,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
