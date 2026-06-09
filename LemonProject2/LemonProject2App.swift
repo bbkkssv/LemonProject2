@@ -11,7 +11,8 @@ import SwiftUI
 struct LemonProject2App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            //ContentView()
+           ReservationForm()
         }
     }
 }
