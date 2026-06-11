@@ -59,7 +59,7 @@ print(label)
 // if the group has children, offer the kids menu
 // no children and less than 8 display Standar
 //     seating
-swiftlet groupSize = 6
+let groupSize = 6
 let hasChildren = true
 
 if groupSize > 8 {
@@ -75,7 +75,7 @@ if groupSize > 8 {
 Show one message if user is VIP, and another if
     not.
 */
-swiftlet isVIP = true
+let isVIP = true
 
 if isVIP {
     print("Welcome back, valued VIP guest!")
