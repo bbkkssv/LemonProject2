@@ -46,78 +46,76 @@ struct BillCalculatorView: View {
         return amount * taxRate
     }
 
-    // 4. calculate the gran total — call the func above
+    // 4. calculate the grand total — call the func above
     
 
     var body: some View {
-        // --- header ---
-        Section{
-            HStack{
-                Image(systemName: "dollarsign.circle.fill")
-                    .foregroundColor(.orange)
-                    .font(.title2)
-                VStack(alignment: .leading){
-                    Text(restaurantName)
-                        .font(.title3)
-                        .bold()
-                    Text("Reservation form")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-            }
-        }
-        // --- input ---
-        Section(header:Text("Your group")){
-            Stepper("Adults: \(adults)", value:$adults, in: 1...20)
-            Stepper("Children: \(children)", value:$children, in: 0...20)
-            Toggle("Apply discount", isOn: $hasDiscount)
-        }
-        // --- breakdown prices ---
-        Section(header: Text("Breakdown prices")){
-            let subtotal = calculateSubtotal(adults:adults,children:children)
-            let discount =
-                calculateDiscount(subtotal:subtotal,hasDiscount:hasDiscount)
-            let afterDiscount = subtotal - discount
-            let tax = calculateTax(amount:afterDiscount)
-            let total = afterDiscount + tax
-            
-            HStack{
-                Text("Subtotal")
-                    .foregroundColor(.secondary)
-                Spacer()
-                Text("$\(subtotal)")
-            }
-            
-        
-
-            if hasDiscount{
+        Form {
+            // --- header ---
+            Section{
                 HStack{
-                    Text("Discount")
-                        .foregroundColor(.green)
+                    Image(systemName: "dollarsign.circle.fill")
+                        .foregroundColor(.orange)
+                        .font(.title2)
+                    VStack(alignment: .leading){
+                        Text(restaurantName)
+                            .font(.title3)
+                            .bold()
+                        Text("Reservation form")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .padding(.vertical, 4)
+            }
+            // --- input ---
+            Section(header:Text("Your group")){
+                Stepper("Adults: \(adults)", value:$adults, in: 1...20)
+                Stepper("Children: \(children)", value:$children, in: 0...20)
+                Toggle("Apply discount", isOn: $hasDiscount)
+            }
+            // --- breakdown prices ---
+            Section(header: Text("Breakdown prices")){
+                let subtotal = calculateSubtotal(adults:adults,children:children)
+                let discount =
+                    calculateDiscount(subtotal:subtotal,hasDiscount:hasDiscount)
+                let afterDiscount = subtotal - discount
+                let tax = calculateTax(amount:afterDiscount)
+                let total = afterDiscount + tax
+                
+                HStack{
+                    Text("Subtotal")
+                        .foregroundColor(.secondary)
                     Spacer()
-                    Text("$\(discount)")
+                    Text("$\(String(format: "%.2f", subtotal))")
+                }
+
+                if hasDiscount{
+                    HStack{
+                        Text("Discount")
+                            .foregroundColor(.green)
+                        Spacer()
+                        Text("-$\(String(format: "%.2f", discount))")
+                            .foregroundColor(.green)
+                    }
+                }
+                
+                HStack{
+                    Text("Taxes (8%)")
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text("$\(String(format: "%.2f", tax))")
+                }
+                
+                HStack{
+                    Text("Total")
+                        .font(.headline)
+                    Spacer()
+                    Text("$\(String(format: "%.2f", total))")
+                        .font(.headline)
                 }
             }
-            
-            HStack{
-                Text("Taxes (%)")
-                    .foregroundColor(.secondary)
-                Spacer()
-                Text("$\(tax)")
-            }
-            
-            HStack{
-                Text("Total")
-                    
-                    .font(.headline)
-                Spacer()
-                Text("$\(total)")
-            }
-
-            // display the taxes calculation
         }
-        // --- main ---
-
     }
 }
 
@@ -125,4 +123,3 @@ struct BillCalculatorView: View {
 #Preview {
     BillCalculatorView()
 }
-
