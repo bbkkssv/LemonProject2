@@ -1,3 +1,4 @@
+
 import SwiftUI
 
 struct ReservationForm: View {
@@ -9,8 +10,8 @@ struct ReservationForm: View {
     // State variables
     // " if this value changes, update the UI"
     @State private var userName = ""
-    @State private var guestCount = 0
-    @State private var phoneNumber = "555-123-45678"
+    @State private var guestCount = 1
+    @State private var phoneNumber = ""
     @State private var previewText = ""
     @State private var children = 0
     @State private var showMessage = false
@@ -28,12 +29,10 @@ struct ReservationForm: View {
 
     var reservationStatus: String {
         if userName.isEmpty && phoneNumber.isEmpty {
-            return "Fill in you name and phone to continue"
+            return "Fill in your name and phone to continue"
         } else if userName.isEmpty {
-            //only the name is empty : missing name
             return "Missing name"
         } else if phoneNumber.isEmpty {
-            // only if phone is missing: missing phone
             return "Missing phone"
         } else {
             return "Ready to preview"
@@ -66,31 +65,26 @@ struct ReservationForm: View {
                     .autocorrectionDisabled(true)
                     .padding(8)
                     .background(nameFieldColor.opacity(0.05))
+                // Condition 1: warning when name is empty
                 if userName.isEmpty {
                     Text("Please enter a name")
                         .font(.footnote)
                         .foregroundColor(.red)
                 }
                 Stepper("Guests: \(guestCount)", value: $guestCount, in: 1...maxGuests)
-                if guestCount == 0 {
-                    Text("Please select at least one guest")
-                        .font(.footnote)
-                        .foregroundColor(.red)
-                }
-                // warn when the party is large
+                // Condition 2: warn when the party is large
                 if guestCount >= 8 {
                     Text("Large group — please call ahead")
                         .font(.footnote)
                         .foregroundColor(.orange)
                 }
             }
-            //Create a section for the contact information
-            // (phone number)
+            // contact information
             Section(header: Text("Contact information")) {
                 TextField("Phone", text: $phoneNumber)
                     .keyboardType(.numberPad)
 
-                // add an if to check if the texfield is empty
+                // Condition 3: phone validation
                 if phoneNumber.isEmpty {
                     Text("Phone number is required.")
                         .font(.footnote)
@@ -109,13 +103,12 @@ struct ReservationForm: View {
             Section(header: Text("Optional")) {
                 Stepper("Children: \(children)", value: $children, in: 0...10)
 
-                // add a validation and if we have children
-                // let's display "Kids menu available"
+                // Condition 4: visible only when children > 0
                 if children > 0 {
                     Text("Kids menu available")
                         .font(.footnote)
                 }
-                Toggle("Show an special text", isOn: $showMessage)
+                Toggle("Show a special text", isOn: $showMessage)
                 if showMessage {
                     Text("Discount %")
                         .foregroundColor(.green)
@@ -128,6 +121,7 @@ struct ReservationForm: View {
                     .foregroundColor(.red)
             }
             Section(header: Text("Actions")) {
+                // Condition 5: button disabled when name is empty
                 Button("Preview reservation") {
                     previewText = """
                     Name: \(userName)
