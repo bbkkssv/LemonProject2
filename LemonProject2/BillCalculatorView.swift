@@ -61,7 +61,7 @@ struct BillCalculatorView: View {
                         Text(restaurantName)
                             .font(.title3)
                             .bold()
-                        Text("Reservation form")
+                        Text("Calculate Bill")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
