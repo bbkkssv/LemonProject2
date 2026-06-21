@@ -205,3 +205,77 @@ for (ingredient, amount) in ingredients {
 }
 
 
+print("\n-- Dictionary with array values (Menu categories)--")
+
+let menuCategories = [
+    "Drink": ["Soda", "Coffee", "Tea", "Wine"],
+    "Appetizers": ["Soup", "Salad", "Garlic Bread"],
+    "Main Courses": ["Pizza", "Pasta", "Steak", "Fish"],
+    "Desserts": ["Ice Cream", "Cake"]
+]
+
+print(menuCategories)
+
+print("\n Looping through menuCategories")
+for (category, items) in menuCategories {
+    print(category)
+    for item in items{
+        print("- \(item)")
+    }
+}
+
+print("\n-- Looping through nemuCategories (forEach)--")
+
+menuCategories.forEach { entry in
+    print(entry.key)
+    entry.value.forEach { item in
+        print("- \(item)")
+    }
+}
+
+
+/*
+ -- Mini Challenge "School subjects and topics" --
+
+ 1. Create a dictionary called "schoolSubjects"
+    - A subject is the key, and the vaue is an array of topics
+
+ 2. Add at least 3 subjects
+    - Examples: Math, Science, Programming, Art ...
+
+ 3. Each subject must have at least 3 topics
+    - Examples:
+        Math > Algebra, Geometry, Fractions
+        Programming > Loops, Arrays, Dictionaries
+
+ 4. Render all the subjects with their topics
+
+ 5. Render your favorite subject with its topics
+
+ */
+
+print("\n-- Mini Challenge: School subjects and topics --")
+
+let schoolSubjects = [
+    "Submarine Warfare": ["Approach and Attack", "Weapons Systems", "Nuclear Reactor Fundementals"],
+    "Computer Science": ["Loops", "Algorithms", "Data Structures"],
+    "Physics": ["Kinematics", "Thermo", "Electricity"],
+    "Underwater Basket Weaving": ["Snorkeling", "Deep water weaving", "Upside down weaving"]
+]
+
+print("\n-- All subjects with their topics --")
+for (subject, topics) in schoolSubjects {
+    print(subject)
+    for topic in topics {
+        print("*** \(topic) ***")
+    }
+}
+
+print("\n-- Favorite subject: Submarine Warfare --")
+print("Submarine Warfare")
+for topic in schoolSubjects["Submarine Warfare"]! {
+    print("Firing point procedures, master 1, tube 1 primary, tube 2 backup!! Fire, master 1*** \(topic) ***")
+}
+
+
+
