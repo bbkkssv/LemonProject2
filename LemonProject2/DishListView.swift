@@ -25,17 +25,31 @@ struct DishListView: View {
         ),
         Dish(
             name: "Pasta",
-            category: "Main Course",
+            category: "Main Courses",
             price: 14.50,
             description: "Lorem ipsum dolor sit amet consectetur, adipiscing elit aliquet egestas mauris sociis, hendrerit eget aliquam turpis. Varius maecenas faucibus mi interdum odio inceptos",
             imageName: "pasta-image"
         ),
         Dish(
             name: "Pizza",
-            category: "Main Course",
+            category: "Main Courses",
             price: 12.00,
             description: "Lorem ipsum dolor sit amet consectetur, adipiscing elit aliquet egestas mauris sociis, hendrerit eget aliquam turpis. Varius maecenas faucibus mi interdum odio inceptos",
             imageName: "pizza-image"
+        ),
+        Dish(
+            name: "Tiramisu",
+            category: "Desserts",
+            price: 8.50,
+            description: "Lorem ipsum dolor sit amet consectetur, adipiscing elit aliquet egestas mauris sociis, hendrerit eget aliquam turpis. Varius maecenas faucibus mi interdum odio inceptos",
+            imageName: "tiramisu-image"
+        ),
+        Dish(
+            name: "Cheesecake",
+            category: "Desserts",
+            price: 7.50,
+            description: "Lorem ipsum dolor sit amet consectetur, adipiscing elit aliquet egestas mauris sociis, hendrerit eget aliquam turpis. Varius maecenas faucibus mi interdum odio inceptos",
+            imageName: "cheesecake-image"
         )
     ]
 
@@ -44,19 +58,27 @@ struct DishListView: View {
         NavigationView {
             List(dishes, id: \.name) { dish in
                 NavigationLink(destination: DishDetailsView(dish: dish)) {
-                    Image(dish.imageName)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 70, height: 70)
+                    HStack(spacing: 12) {
+                        Image(dish.imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 70, height: 70)
+                            .cornerRadius(8)
 
-                    VStack{
-                        Text(dish.name)
-                        Text(dish.category)
-                        Text(String(format: "%.2f", dish.price))
-                        //Text(dish.description)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(dish.name)
+                                .font(.headline)
+                            Text(dish.category)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            Text(String(format: "$%.2f", dish.price))
+                                .font(.subheadline)
+                                .foregroundColor(.green)
+                        }
                     }
                 }
             }
+            .navigationTitle("Menu")
         }
     }
 }
