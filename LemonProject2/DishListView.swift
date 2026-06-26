@@ -52,33 +52,55 @@ struct DishListView: View {
             imageName: "cheesecake-image"
         )
     ]
-
-
+    
+    @State private var selectedCategory:String = "All"
+    
+    var filteredDishes:[Dish] {
+        if selectedCategory == "All"{
+            return dishes}
+        else {
+            return dishes.filter{ $0.category == selectedCategory}
+        }
+            
+    }
+    
+    
     var body: some View {
         NavigationView {
-            List(dishes, id: \.name) { dish in
-                NavigationLink(destination: DishDetailsView(dish: dish)) {
-                    HStack(spacing: 12) {
-                        Image(dish.imageName)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 70, height: 70)
-                            .cornerRadius(8)
+            VStack {
+                Picker("Category", selection: $selectedCategory) {
+                    Text("All").tag("All")
+                    Text("Breakfast").tag("Breakfast")
+                    Text("Salads").tag("Salads")
+                    Text("Main Courses").tag("Main Courses")
+                    Text("Desserts").tag("Desserts")
+                }
+                .pickerStyle(.segmented)
+                
+                List(filteredDishes, id: \.name) { dish in
+                    NavigationLink(destination: DishDetailsView(dish: dish)) {
+                        HStack(spacing: 12) {
+                            Image(dish.imageName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 70, height: 70)
+                                .cornerRadius(8)
 
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(dish.name)
-                                .font(.headline)
-                            Text(dish.category)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            Text(String(format: "$%.2f", dish.price))
-                                .font(.subheadline)
-                                .foregroundColor(.green)
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(dish.name)
+                                    .font(.headline)
+                                Text(dish.category)
+                                    .font(.subheadline)
+                                    .foregroundColor(.secondary)
+                                Text(String(format: "$%.2f", dish.price))
+                                    .font(.subheadline)
+                                    .foregroundColor(.green)
+                            }
                         }
                     }
                 }
+                .navigationTitle("Menu")
             }
-            .navigationTitle("Menu")
         }
     }
 }
