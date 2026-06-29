@@ -45,7 +45,7 @@ struct MenuListView: View {
                             Text(dish["name"] ?? "")
                             Spacer()
                             Text("$\(dish["price"] ?? "")")
-                                .foregroundColor(.black)
+                                .foregroundStyle(.primary)
                         }
                     }
                 }

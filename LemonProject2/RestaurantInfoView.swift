@@ -29,7 +29,7 @@ struct RestaurantInfoView: View {
                     ForEach(Array(socialMedia), id: \.key) { (key, value) in
                         HStack {
                             Text(key)
-                                .foregroundColor(.blue)
+                                .foregroundStyle(.blue)
 
                             Spacer()
 
@@ -43,7 +43,7 @@ struct RestaurantInfoView: View {
                     ForEach(Array(menuCategories), id: \.key) { (key, value) in
                         HStack {
                             Text(key)
-                                .foregroundColor(.blue)
+                                .foregroundStyle(.blue)
 
                             Spacer()
 

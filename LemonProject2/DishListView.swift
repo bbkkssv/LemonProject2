@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DishListView: View {
-    var dishes: [Dish] = [
+    @State private var dishes: [Dish] = [
         Dish(
             name: "Pancake",
             category: "Breakfast",
@@ -54,7 +54,15 @@ struct DishListView: View {
     ]
     
     @State private var selectedCategory:String = "All"
-    
+    @State private var showAddDish = false
+    @State private var newDish = Dish(
+        name: "",
+        category: "",
+        price: 0,
+        description: "",
+        imageName: ""
+    )
+
     var filteredDishes:[Dish] {
         if selectedCategory == "All"{
             return dishes}
@@ -68,6 +76,19 @@ struct DishListView: View {
     var body: some View {
         NavigationView {
             VStack {
+                
+                HStack {
+                    Spacer()
+                    
+                    Button(action : {
+                        showAddDish = true
+                    }){
+                        Image(systemName: "plus.circle.fill")
+                        Text("Add Dish")
+                    }
+                }
+                .padding(.horizontal)
+                
                 Picker("Category", selection: $selectedCategory) {
                     Text("All").tag("All")
                     Text("Breakfast").tag("Breakfast")
@@ -91,15 +112,19 @@ struct DishListView: View {
                                     .font(.headline)
                                 Text(dish.category)
                                     .font(.subheadline)
-                                    .foregroundColor(.secondary)
+                                    .foregroundStyle(.primary)
                                 Text(String(format: "$%.2f", dish.price))
                                     .font(.subheadline)
-                                    .foregroundColor(.green)
+                                    .foregroundStyle(.green)
                             }
                         }
                     }
                 }
                 .navigationTitle("Menu")
+            }
+            .sheet(isPresented: $showAddDish) {
+                AddDishViewForm(newDish: $newDish, dishes: $dishes )
+                
             }
         }
     }
@@ -107,4 +132,5 @@ struct DishListView: View {
 
 #Preview {
     DishListView()
+        .preferredColorScheme(.dark)
 }

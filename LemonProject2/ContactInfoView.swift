@@ -42,7 +42,7 @@ struct ContactInfoView: View {
                     HStack(spacing: 16) {
                         Image(systemName: serviceIcons[service] ?? "star.fill")
                             .font(.title3)
-                            .foregroundColor(.blue)
+                            .foregroundStyle(.blue)
                             .frame(width: 32)
 
                         Text(service)

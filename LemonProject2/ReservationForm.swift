@@ -45,7 +45,7 @@ struct ReservationForm: View {
             Section {
                 HStack {
                     Image(systemName: "fork.knife")
-                        .foregroundColor(.orange)
+                        .foregroundStyle(.orange)
                         .font(.title2)
                     VStack(alignment: .leading) {
                         Text(restaurantName)
@@ -53,7 +53,7 @@ struct ReservationForm: View {
                             .bold()
                         Text("Reservation form")
                             .font(.subheadline)
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
                 }
             }
@@ -69,14 +69,14 @@ struct ReservationForm: View {
                 if userName.isEmpty {
                     Text("Please enter a name")
                         .font(.footnote)
-                        .foregroundColor(.red)
+                        .foregroundStyle(.red)
                 }
                 Stepper("Guests: \(guestCount)", value: $guestCount, in: 1...maxGuests)
                 // Condition 2: warn when the party is large
                 if guestCount >= 8 {
                     Text("Large group — please call ahead")
                         .font(.footnote)
-                        .foregroundColor(.orange)
+                        .foregroundStyle(.orange)
                 }
             }
             // contact information
@@ -88,15 +88,15 @@ struct ReservationForm: View {
                 if phoneNumber.isEmpty {
                     Text("Phone number is required.")
                         .font(.footnote)
-                        .foregroundColor(.red)
+                        .foregroundStyle(.red)
                 } else if phoneNumber.count < 10 {
                     Text("Number is too short - keep trying.")
                         .font(.footnote)
-                        .foregroundColor(.orange)
+                        .foregroundStyle(.orange)
                 } else {
                     Text("Looks good!")
                         .font(.footnote)
-                        .foregroundColor(.green)
+                        .foregroundStyle(.green)
                 }
             }
 
@@ -111,14 +111,14 @@ struct ReservationForm: View {
                 Toggle("Show a special text", isOn: $showMessage)
                 if showMessage {
                     Text("Discount %")
-                        .foregroundColor(.green)
+                        .foregroundStyle(.green)
                 }
             }
 
             Section {
                 Text(reservationStatus)
                     .font(.footnote)
-                    .foregroundColor(.red)
+                    .foregroundStyle(.red)
             }
             Section(header: Text("Actions")) {
                 // Condition 5: button disabled when name is empty
@@ -133,7 +133,7 @@ struct ReservationForm: View {
             Section(header: Text("Preview")) {
                 Text(previewText.isEmpty ? "No information yet" : previewText)
                     .font(.footnote)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                     .padding(.vertical, 5)
                     .textSelection(.enabled)
             }

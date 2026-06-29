@@ -55,7 +55,7 @@ struct BillCalculatorView: View {
             Section{
                 HStack{
                     Image(systemName: "dollarsign.circle.fill")
-                        .foregroundColor(.orange)
+                        .foregroundStyle(.orange)
                         .font(.title2)
                     VStack(alignment: .leading){
                         Text(restaurantName)
@@ -63,7 +63,7 @@ struct BillCalculatorView: View {
                             .bold()
                         Text("Calculate Bill")
                             .font(.subheadline)
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.secondary)
                     }
                 }
                 .padding(.vertical, 4)
@@ -85,7 +85,7 @@ struct BillCalculatorView: View {
                 
                 HStack{
                     Text("Subtotal")
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.primary)
                     Spacer()
                     Text("$\(String(format: "%.2f", subtotal))")
                 }
@@ -93,16 +93,16 @@ struct BillCalculatorView: View {
                 if hasDiscount{
                     HStack{
                         Text("Discount")
-                            .foregroundColor(.green)
+                            .foregroundStyle(.green)
                         Spacer()
                         Text("-$\(String(format: "%.2f", discount))")
-                            .foregroundColor(.green)
+                            .foregroundStyle(.green)
                     }
                 }
                 
                 HStack{
                     Text("Taxes (8%)")
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.primary)
                     Spacer()
                     Text("$\(String(format: "%.2f", tax))")
                 }

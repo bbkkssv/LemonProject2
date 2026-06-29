@@ -40,14 +40,14 @@ struct DishDetailsView: View {
                     HStack {
                         Text(dish.category.uppercased())
                             .font(.subheadline)
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(.primary)
 
                         Spacer()
 
                         Text(String(format: "$%.2f", dish.price))
                             .font(.title3)
                             .fontWeight(.semibold)
-                            .foregroundColor(.green)
+                            .foregroundStyle(.green)
                     }
                 }
 
@@ -55,7 +55,7 @@ struct DishDetailsView: View {
 
                 Text(dish.description)
                     .font(.body)
-                    .foregroundColor(.gray)
+                    .foregroundStyle(.primary)
             }
             .padding()
         }
@@ -73,4 +73,5 @@ struct DishDetailsView: View {
             imageName: "greek-salad-image"
         )
     )
+    .preferredColorScheme(.dark)
 }

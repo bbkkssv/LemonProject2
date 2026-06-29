@@ -13,6 +13,7 @@ struct LemonProject2App: App {
         WindowGroup {
             //ContentView()
            ReservationForm()
+                .preferredColorScheme(.dark)
         }
     }
 }
